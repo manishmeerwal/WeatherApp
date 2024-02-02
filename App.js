@@ -1,20 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// App.js
 
-export default function App() {
+import { useState } from 'react';
+import { View, TextInput, Button, StyleSheet } from 'react-native';
+import WeatherApp from './WeatherApp';
+
+const App = () => {
+  const [city, setCity] = useState('');
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <TextInput
+        style={styles.input}
+        placeholder="Enter city name"
+        value={city}
+        onChangeText={(text) => setCity(text)}
+      />
+      <Button title="Get Weather" onPress={() => setCity(city)} />
+      <WeatherApp city={city} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ecf0f1', // Light background color
+    padding: 16,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 16,
+    padding: 8,
+    width: '100%',
+    backgroundColor: '#fff', // Input field color
   },
 });
+
+export default App;
